@@ -15,9 +15,10 @@ def addToCSV(businesses):
                         ]
                         for business in businesses
                         ]
+    print()
     print(total_businesses)
     for business in total_businesses:
-        with open('barbershopsYelp2.csv','a') as fd:
+        with open('barbershopsSF.csv','a') as fd:
             wr = csv.writer(fd)
             wr.writerow(business)
 
@@ -29,21 +30,20 @@ def search_for_barbershops():
                  if c[key]['countrycode'] == 'US']
     MY_API_KEY = "QAidGECI2mDDbvq4GFMttBHXbDn2oKtLx9EObssDfDroHh3KYKAp7VsMsHYvhLaITKsTI8lfFBd-SHNc5L1r9r5jFZzJi4QgVB2WN4r4ZydAmfg1XjV8eu1rNfYGXXYx" #  Replace this with your real API key
     yelp_api = YelpAPI(MY_API_KEY)
-    for city in US_cities:
+    # for city in US_cities:
         # for i in range(1):
-        for i in range(1,5):
-            print(city)
-            search_results = yelp_api.search_query(term='barber shop', location=city, price=i
+    for i in range(1,5):
+        #     print(city)
+        search_results = yelp_api.search_query(term='barber shop', location='San Francisco', price=i
                       )
-            count += 1
-            # print(search_results)
-            businesses = search_results['businesses']
-            addToCSV(businesses)
-            print(count, 'When do i break')
+    # print(search_results)
+        businesses = search_results['businesses']
+        addToCSV(businesses)
+    # print(count, 'When do i break')
 
 
 def createCSV():
-    with open('barbershopsYelp2.csv', 'w') as csvfile:
+    with open('barbershopsSF.csv', 'w') as csvfile:
         filewriter = csv.writer(csvfile, delimiter=',',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         filewriter.writerow(['Name', 'City', 'State', 'PhoneNumber', 'Rating', 'Price'])
